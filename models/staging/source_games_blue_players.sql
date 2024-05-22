@@ -1,0 +1,102 @@
+{{ config(materialized='view') }}
+
+with source_data as (
+
+    select
+    'blue' as label
+    , player___id
+    , player__slug
+    , player__tag
+    , player__country
+    , stats__core__shots
+    , stats__core__goals
+    , stats__core__saves
+    , stats__core__assists
+    , stats__core__score
+    , stats__core__shooting_percentage
+    , stats__boost__bpm
+    , stats__boost__bcpm
+    , stats__boost__avg_amount
+    , stats__boost__amount_collected
+    , stats__boost__amount_stolen
+    , stats__boost__amount_collected_big
+    , stats__boost__amount_stolen_big
+    , stats__boost__amount_collected_small
+    , stats__boost__amount_stolen_small
+    , stats__boost__count_collected_big
+    , stats__boost__count_stolen_big
+    , stats__boost__count_collected_small
+    , stats__boost__count_stolen_small
+    , stats__boost__amount_overfill
+    , stats__boost__amount_overfill_stolen
+    , stats__boost__amount_used_while_supersonic
+    , stats__boost__time_zero_boost
+    , stats__boost__percent_zero_boost
+    , stats__boost__time_full_boost
+    , stats__boost__percent_full_boost
+    , stats__boost__time_boost0_to25
+    , stats__boost__time_boost25_to50
+    , stats__boost__time_boost50_to75
+    , stats__boost__time_boost75_to100
+    , stats__boost__percent_boost0_to25
+    , stats__boost__percent_boost25_to50
+    , stats__boost__percent_boost50_to75
+    , stats__boost__percent_boost75_to100
+    , stats__movement__avg_speed
+    , stats__movement__total_distance
+    , stats__movement__time_supersonic_speed
+    , stats__movement__time_boost_speed
+    , stats__movement__time_slow_speed
+    , stats__movement__time_ground
+    , stats__movement__time_low_air
+    , stats__movement__time_high_air
+    , stats__movement__time_powerslide
+    , stats__movement__count_powerslide
+    , stats__movement__avg_powerslide_duration
+    , stats__movement__avg_speed_percentage
+    , stats__movement__percent_slow_speed
+    , stats__movement__percent_boost_speed
+    , stats__movement__percent_supersonic_speed
+    , stats__movement__percent_ground
+    , stats__movement__percent_low_air
+    , stats__movement__percent_high_air
+    , stats__positioning__avg_distance_to_ball
+    , stats__positioning__avg_distance_to_ball_possession
+    , stats__positioning__avg_distance_to_ball_no_possession
+    , stats__positioning__avg_distance_to_mates
+    , stats__positioning__time_defensive_third
+    , stats__positioning__time_neutral_third
+    , stats__positioning__time_offensive_third
+    , stats__positioning__time_defensive_half
+    , stats__positioning__time_offensive_half
+    , stats__positioning__time_behind_ball
+    , stats__positioning__time_infront_ball
+    , stats__positioning__time_most_back
+    , stats__positioning__time_most_forward
+    , stats__positioning__goals_against_while_last_defender
+    , stats__positioning__time_closest_to_ball
+    , stats__positioning__time_farthest_from_ball
+    , stats__positioning__percent_defensive_third
+    , stats__positioning__percent_offensive_third
+    , stats__positioning__percent_neutral_third
+    , stats__positioning__percent_defensive_half
+    , stats__positioning__percent_offensive_half
+    , stats__positioning__percent_behind_ball
+    , stats__positioning__percent_infront_ball
+    , stats__positioning__percent_most_back
+    , stats__positioning__percent_most_forward
+    , stats__positioning__percent_closest_to_ball
+    , stats__positioning__percent_farthest_from_ball
+    , stats__demo__inflicted
+    , stats__demo__taken
+    , advanced__goal_participation
+    , advanced__rating
+    , advanced__mvp
+    , _dlt_parent_id
+    , _dlt_list_idx
+    , _dlt_id
+from {{ source('rocket_league', 'source_octane_games__blue__players') }}
+)
+
+select *
+from source_data

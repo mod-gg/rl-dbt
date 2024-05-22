@@ -1,0 +1,65 @@
+version: 2
+
+sources:
+  - name: rocket_league
+    description: rocket league source schema from octane.gg games endpoint
+    loader: dlt
+    database: rocket-league
+    schema: rocket_league
+    tables:
+      - name: source_octane_games
+        columns:
+          - name: _id
+            description: Primary key of the table
+            tests:
+              - unique
+              - not_null
+          - name: _dlt_id
+            description: dlt key of the table
+            tests:
+              - unique
+              - not_null
+
+      - name: source_octane_games__match__games
+        columns:
+          - name: _id
+            description: Primary key of the table
+          - name: _dlt_id
+            description: dlt key of the table
+            tests:
+              - unique
+              - not_null
+
+      - name: source_octane_games__blue__players
+        columns:
+          - name: player___id
+            description: player id
+            tests:
+              - not_null
+          - name: _dlt_id
+            description: dlt key of the table
+            tests:
+              - unique
+              - not_null
+          - name: _dlt_parent_id
+            description: dlt key of the parent table
+            tests:
+              - not_null
+      
+      - name: source_octane_games__orange__players
+        columns:
+          - name: player___id
+            description: player id
+            tests:
+              - not_null
+          - name: _dlt_id
+            description: dlt key of the table
+            tests:
+              - unique
+              - not_null
+          - name: _dlt_parent_id
+            description: dlt key of the parent table
+            tests:
+              - not_null
+      
+      - name: source_octane_games__match__event__groups
